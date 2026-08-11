@@ -16,19 +16,6 @@ class IncusSpawn < Formula
 
   depends_on "vfkit"
 
-  resource "isx-proxy" do
-    on_macos do
-      on_arm do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.2.21/isx-proxy-macos-aarch64"
-        sha256 "0000000000000000000000000000000000000000000000000000000000000000"
-      end
-      on_intel do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.2.21/isx-proxy-macos-x86_64"
-        sha256 "0000000000000000000000000000000000000000000000000000000000000000"
-      end
-    end
-  end
-
   resource "git-remote-isx" do
     url "https://github.com/Sanne/incus-spawn/releases/download/v0.2.21/git-remote-isx"
     sha256 "23dce674bcceed571f2c7760143d8bbf08aae1f903c3cf398f5256b0bf1cfa10"
@@ -44,14 +31,6 @@ class IncusSpawn < Formula
       bin.install "incus-spawn-macos-aarch64" => "isx"
     else
       bin.install "incus-spawn-macos-x86_64" => "isx"
-    end
-
-    resource("isx-proxy").stage do
-      if Hardware::CPU.arm?
-        bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
-      else
-        bin.install "isx-proxy-macos-x86_64" => "isx-proxy"
-      end
     end
 
     resource("git-remote-isx").stage do
