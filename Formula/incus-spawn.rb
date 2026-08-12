@@ -1,29 +1,42 @@
 class IncusSpawn < Formula
   desc "CLI tool for managing isolated Incus-based development environments"
   homepage "https://github.com/Sanne/incus-spawn"
-  version "0.2.21"
+  version "0.3.0"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-      sha256 "d47951b2a25ed058c61824c502ffea8037ed89bfe16c3061f6f5ab45de23417b"
+      sha256 "ecbd9bec0d78238d6f941e4224b3416966e9d628b5e3aa3fdc74bbc35ab76a73"
     else
       url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-x86_64"
-      sha256 "7e0a6e6390478e3f5bacabda8c8bae69f9bc778018599bc53869f3d49e521ae3"
+      sha256 "4fa99a2b0974a95e0fc48b9c1e5e2f1e90c60c05c31f5ef020d1172997f35da2"
     end
   end
 
   depends_on "vfkit"
 
+  resource "isx-proxy" do
+    on_macos do
+      on_arm do
+        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.0/isx-proxy-macos-aarch64"
+        sha256 "92344d9ae2e03ac08fccb921f9b2bdd092f4cde8e2d5b6d5a294ae58bad26074"
+      end
+      on_intel do
+        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.0/isx-proxy-macos-x86_64"
+        sha256 "3a4b595668cb43b50643f741340aa9e7aab5f8b47554a166f0092b0c0ea1aa1c"
+      end
+    end
+  end
+
   resource "git-remote-isx" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.2.21/git-remote-isx"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.0/git-remote-isx"
     sha256 "23dce674bcceed571f2c7760143d8bbf08aae1f903c3cf398f5256b0bf1cfa10"
   end
 
   resource "completions" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.2.21/completions.tar.gz"
-    sha256 "81f7c40b9b55eb41f63a8cfc663a56929f252e90b7a6fdcc5edf61fb5f909659"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.0/completions.tar.gz"
+    sha256 "9550e7574ab4a0fab15085c73f7768835bc9400a31e740c442127f27a1ceefe5"
   end
 
   def install
@@ -31,6 +44,14 @@ class IncusSpawn < Formula
       bin.install "incus-spawn-macos-aarch64" => "isx"
     else
       bin.install "incus-spawn-macos-x86_64" => "isx"
+    end
+
+    resource("isx-proxy").stage do
+      if Hardware::CPU.arm?
+        bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
+      else
+        bin.install "isx-proxy-macos-x86_64" => "isx-proxy"
+      end
     end
 
     resource("git-remote-isx").stage do
