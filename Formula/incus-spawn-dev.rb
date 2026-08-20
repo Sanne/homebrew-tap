@@ -1,16 +1,16 @@
 class IncusSpawnDev < Formula
   desc "CLI tool for managing isolated Incus-based development environments (dev channel)"
   homepage "https://github.com/Sanne/incus-spawn"
-  version "0.3.2-dev.2"
+  version "0.3.2-dev.3"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-      sha256 "6242121c9adb3c41d3c5468b8c1c1b32817419e74f07556dd06b873ec566865e"
+      sha256 "28ca535d62376f40d6984635c69876fe0b0ae4a0039b1f4878c51232ec79e783"
     else
       url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-x86_64"
-      sha256 "9ff1355a95d29c0ebcd8bb51738078d457338e7c28d49c0e40df8e89e456f941"
+      sha256 "1db87986f6b8d242aed58efa226e4e014186c58ca5a78666c0b85943b2604351"
     end
   end
 
@@ -21,24 +21,24 @@ class IncusSpawnDev < Formula
   resource "isx-proxy" do
     on_macos do
       on_arm do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.2/isx-proxy-macos-aarch64"
-        sha256 "7f2ddc8f4be7387f1966478ffc1348e883df199713e95156b0307ad9ea8d254c"
+        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.3/isx-proxy-macos-aarch64"
+        sha256 "a3662531542ba450f55f7d31e04351c1b684e4dd805a49905c2b98cecf131142"
       end
       on_intel do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.2/isx-proxy-macos-x86_64"
-        sha256 "5aead5625f7cacf7e7f8a867bc70e92d25c590cd630d11c76dc8efcbd5a8fd95"
+        url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.3/isx-proxy-macos-x86_64"
+        sha256 "cde386e9c80367183114b13ff9bf3533a71749daf6a0e36d2deef95531b2e34e"
       end
     end
   end
 
   resource "git-remote-isx" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.2/git-remote-isx"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.3/git-remote-isx"
     sha256 "23dce674bcceed571f2c7760143d8bbf08aae1f903c3cf398f5256b0bf1cfa10"
   end
 
   resource "completions" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.2/completions.tar.gz"
-    sha256 "71f514ee37924a6da318180007bf52ce21a9896a76d0056ac1ede858c71b8424"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.3.2-dev.3/completions.tar.gz"
+    sha256 "cd375b02139315332d9cd912684ecfc890d512eb875781eaf9614647627a907c"
   end
 
   def install
