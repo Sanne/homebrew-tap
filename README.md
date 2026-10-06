@@ -22,8 +22,9 @@ brew install Sanne/tap/incus-spawn
 ```
 
 **Requirements:**
-- Apple Silicon Mac (arm64)
-- macOS 13 or later
+- Apple Silicon (arm64) or Intel (x86_64) Mac
+- macOS 15 (Sequoia) or later: the release binaries are built on macOS 15, and the formula
+  declares `depends_on macos: :sequoia`, so `brew install` refuses older versions
 
 **Documentation:** https://github.com/Sanne/incus-spawn
 
@@ -39,7 +40,10 @@ brew install Sanne/tap/incus-spawn
 
 ### Updating incus-spawn
 
-After each release in the main repo:
+The incus-spawn release workflow updates `Formula/incus-spawn.rb` (and `incus-spawn-dev.rb` for
+`-dev` tags) automatically, including the `depends_on macos:` minimum; see
+[docs/HOMEBREW.md](https://github.com/Sanne/incus-spawn/blob/main/docs/HOMEBREW.md). If that step
+fails, update the formula by hand after the release, keeping the `depends_on macos:` line:
 
 1. **Update version** in `Formula/incus-spawn.rb`
 
