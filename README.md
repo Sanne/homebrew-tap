@@ -22,7 +22,8 @@ brew install Sanne/tap/incus-spawn
 ```
 
 **Requirements:**
-- Apple Silicon (arm64) or Intel (x86_64) Mac
+- Apple Silicon (arm64) Mac; Intel (x86_64) Macs get a binary too, as best effort: it is
+  built and released on the same minimum but not verified on an Intel Mac
 - macOS 15 (Sequoia) or later: the release binaries are built for macOS 15 and checked for it
   before release, and the formula declares `depends_on macos: :sequoia`, so `brew install`
   refuses older versions
