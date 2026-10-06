@@ -23,8 +23,9 @@ brew install Sanne/tap/incus-spawn
 
 **Requirements:**
 - Apple Silicon (arm64) or Intel (x86_64) Mac
-- macOS 15 (Sequoia) or later: the release binaries are built on macOS 15, and the formula
-  declares `depends_on macos: :sequoia`, so `brew install` refuses older versions
+- macOS 15 (Sequoia) or later: the release binaries are built for macOS 15 and checked for it
+  before release, and the formula declares `depends_on macos: :sequoia`, so `brew install`
+  refuses older versions
 
 **Documentation:** https://github.com/Sanne/incus-spawn
 
