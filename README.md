@@ -22,7 +22,9 @@ brew install Sanne/tap/incus-spawn
 ```
 
 **Requirements:**
-- Apple Silicon (arm64) or Intel (x86_64) Mac
+- Apple Silicon (arm64) Mac. Intel Macs are not supported since the first release on Quarkus 4
+  (v0.4.2 and v0.5.0-dev.2 were the last with an Intel binary); the formulas declare
+  `depends_on arch: :arm64`, so `brew install` refuses on an Intel Mac before downloading
 - macOS 15 (Sequoia) or later: the release binaries are built on macOS 15, and the formula
   declares `depends_on macos: :sequoia`, so `brew install` refuses older versions
 

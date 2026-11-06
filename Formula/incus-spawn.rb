@@ -4,30 +4,16 @@ class IncusSpawn < Formula
   version "0.4.2"
   license "Apache-2.0"
 
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-      sha256 "40d5781918c0273af01529d79e5814f74c2a90531871143227046010ddce8f42"
-    else
-      url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-x86_64"
-      sha256 "c9ff928cf3304d78e24b752260e39b4d3c16f9df9144e4496251086b8c8e4db3"
-    end
-  end
+  url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
+  sha256 "40d5781918c0273af01529d79e5814f74c2a90531871143227046010ddce8f42"
 
+  depends_on arch: :arm64
   depends_on macos: :sequoia
   depends_on "vfkit"
 
   resource "isx-proxy" do
-    on_macos do
-      on_arm do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/isx-proxy-macos-aarch64"
-        sha256 "510c57deffbcf60f50d5dd6ac06c77e5dbfe33d8de85d20f402684d26a27d90f"
-      end
-      on_intel do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/isx-proxy-macos-x86_64"
-        sha256 "50b8c7e9e51ce86ff6de2b837a69389e326cb4ea53d697bea738a87d37a726c6"
-      end
-    end
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/isx-proxy-macos-aarch64"
+    sha256 "510c57deffbcf60f50d5dd6ac06c77e5dbfe33d8de85d20f402684d26a27d90f"
   end
 
   resource "git-remote-isx" do
@@ -41,18 +27,10 @@ class IncusSpawn < Formula
   end
 
   def install
-    if Hardware::CPU.arm?
-      bin.install "incus-spawn-macos-aarch64" => "isx"
-    else
-      bin.install "incus-spawn-macos-x86_64" => "isx"
-    end
+    bin.install "incus-spawn-macos-aarch64" => "isx"
 
     resource("isx-proxy").stage do
-      if Hardware::CPU.arm?
-        bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
-      else
-        bin.install "isx-proxy-macos-x86_64" => "isx-proxy"
-      end
+      bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
     end
 
     resource("git-remote-isx").stage do
