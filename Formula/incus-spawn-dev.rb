@@ -4,32 +4,18 @@ class IncusSpawnDev < Formula
   version "0.5.0-dev.2"
   license "Apache-2.0"
 
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-      sha256 "ffe0b2a30e63b1a946571f3c926b0ddd3a8eac826caeb25271608375f0e34fc1"
-    else
-      url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-x86_64"
-      sha256 "29cdbf01761d813a75c205ac0231ec0d6858c8c15fe88143a500a34fd33bcd39"
-    end
-  end
+  url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
+  sha256 "ffe0b2a30e63b1a946571f3c926b0ddd3a8eac826caeb25271608375f0e34fc1"
 
+  depends_on arch: :arm64
   depends_on macos: :sequoia
   depends_on "vfkit"
 
   conflicts_with "incus-spawn", because: "both install the `isx` binary"
 
   resource "isx-proxy" do
-    on_macos do
-      on_arm do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.2/isx-proxy-macos-aarch64"
-        sha256 "be258a3593bc4d02099c7f52342ac768847c1d0d02d9e485ea8b973dc518d30d"
-      end
-      on_intel do
-        url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.2/isx-proxy-macos-x86_64"
-        sha256 "a217a3f5aca5ad121fd7528fe663ba0cdf352fb52dbdd8345c626b82d0244d82"
-      end
-    end
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.2/isx-proxy-macos-aarch64"
+    sha256 "be258a3593bc4d02099c7f52342ac768847c1d0d02d9e485ea8b973dc518d30d"
   end
 
   resource "git-remote-isx" do
@@ -43,18 +29,10 @@ class IncusSpawnDev < Formula
   end
 
   def install
-    if Hardware::CPU.arm?
-      bin.install "incus-spawn-macos-aarch64" => "isx"
-    else
-      bin.install "incus-spawn-macos-x86_64" => "isx"
-    end
+    bin.install "incus-spawn-macos-aarch64" => "isx"
 
     resource("isx-proxy").stage do
-      if Hardware::CPU.arm?
-        bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
-      else
-        bin.install "isx-proxy-macos-x86_64" => "isx-proxy"
-      end
+      bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
     end
 
     resource("git-remote-isx").stage do
