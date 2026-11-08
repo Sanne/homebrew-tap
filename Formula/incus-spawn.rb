@@ -1,29 +1,29 @@
 class IncusSpawn < Formula
   desc "CLI tool for managing isolated Incus-based development environments"
   homepage "https://github.com/Sanne/incus-spawn"
-  version "0.4.2"
+  version "0.5.0"
   license "Apache-2.0"
 
   url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-  sha256 "40d5781918c0273af01529d79e5814f74c2a90531871143227046010ddce8f42"
+  sha256 "f31d354dde92d15ba4aacb6abdad53bb29b5f9be1753ed2602ea91c174934f20"
 
-  depends_on arch: :arm64
   depends_on macos: :sequoia
+  depends_on arch: :arm64
   depends_on "vfkit"
 
   resource "isx-proxy" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/isx-proxy-macos-aarch64"
-    sha256 "510c57deffbcf60f50d5dd6ac06c77e5dbfe33d8de85d20f402684d26a27d90f"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0/isx-proxy-macos-aarch64"
+    sha256 "f00a66a2eea73acbf332b1f810e74adff354ccc9450835ae613e1cf02b703bb1"
   end
 
   resource "git-remote-isx" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/git-remote-isx"
-    sha256 "23dce674bcceed571f2c7760143d8bbf08aae1f903c3cf398f5256b0bf1cfa10"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0/git-remote-isx"
+    sha256 "3a0d717f18c6d35fc27266e291e3b91f725cdc17b272db7b2995abe4b72cf4b6"
   end
 
   resource "completions" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.4.2/completions.tar.gz"
-    sha256 "2633a00d63004823e894e20863039e3cd3ba98b9c131960aba180533e9a6e149"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0/completions.tar.gz"
+    sha256 "c29b8d418cd995b022abf1aaf9df5ec86242a29509c8d4b72c650f54d01538f6"
   end
 
   def install
