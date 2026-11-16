@@ -1,11 +1,11 @@
 class IncusSpawnDev < Formula
   desc "CLI tool for managing isolated Incus-based development environments (dev channel)"
   homepage "https://github.com/Sanne/incus-spawn"
-  version "0.5.0-dev.4"
+  version "0.5.3-dev.1"
   license "Apache-2.0"
 
   url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-  sha256 "0b328d784446126516f4b711f38d5d6c87632eb31b19f711f3af497e8229fd8b"
+  sha256 "645998a292c7eb9c06c28af250168e6e7523851054348bbe36b53a907dadd8aa"
 
   depends_on macos: :sequoia
   depends_on arch: :arm64
@@ -14,18 +14,18 @@ class IncusSpawnDev < Formula
   conflicts_with "incus-spawn", because: "both install the `isx` binary"
 
   resource "isx-proxy" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.4/isx-proxy-macos-aarch64"
-    sha256 "1d53c0c7b4e64ce01bbe103cfed931137d74ac96b31a7b41ec4d1f3d9545046c"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3-dev.1/isx-proxy-macos-aarch64"
+    sha256 "33812dd362267672d78547b6fd0dbf6e0d0dccdad9e293253a81f5d71f81d58e"
   end
 
   resource "git-remote-isx" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.4/git-remote-isx"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3-dev.1/git-remote-isx"
     sha256 "3a0d717f18c6d35fc27266e291e3b91f725cdc17b272db7b2995abe4b72cf4b6"
   end
 
   resource "completions" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.0-dev.4/completions.tar.gz"
-    sha256 "6e8bb395df71efeeb49a755522973cba1b779e010cf7d58169a7533022317ff6"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3-dev.1/completions.tar.gz"
+    sha256 "8aab36c293745d61ebcfa2bef6fc43f936a0ecd26765250dcfe25c2f35b4d14d"
   end
 
   def install
