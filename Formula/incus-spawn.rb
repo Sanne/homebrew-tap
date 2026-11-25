@@ -1,29 +1,33 @@
 class IncusSpawn < Formula
   desc "CLI tool for managing isolated Incus-based development environments"
   homepage "https://github.com/Sanne/incus-spawn"
-  version "0.5.3"
+  version "0.6.0"
   license "Apache-2.0"
 
   url "https://github.com/Sanne/incus-spawn/releases/download/v#{version}/incus-spawn-macos-aarch64"
-  sha256 "190a62daf59dec873e0e27cb23b39f3a9d17078d83a6de1ec56c9cd983dde625"
+  sha256 "43ca9c511800e7e5aebff552e98fb98ff833a0e2821301b31d1ad25a7f289981"
 
   depends_on macos: :sequoia
   depends_on arch: :arm64
-  depends_on "vfkit"
 
   resource "isx-proxy" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3/isx-proxy-macos-aarch64"
-    sha256 "8594703add079583138c3462995519c2254a78271737cfd3b5b5673f590e9ea8"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.6.0/isx-proxy-macos-aarch64"
+    sha256 "58029781ca57a4ff3dbf90ba414a01b151c3d93a5e16c4d1d10eba7f4c69f4b9"
+  end
+
+  resource "isx-vm" do
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.6.0/isx-vm-macos-aarch64"
+    sha256 "0381341694bf62334ececc6e07ca2fca8f4e1e044336ad2c98583e6850241084"
   end
 
   resource "git-remote-isx" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3/git-remote-isx"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.6.0/git-remote-isx"
     sha256 "3a0d717f18c6d35fc27266e291e3b91f725cdc17b272db7b2995abe4b72cf4b6"
   end
 
   resource "completions" do
-    url "https://github.com/Sanne/incus-spawn/releases/download/v0.5.3/completions.tar.gz"
-    sha256 "77e2b95d007b6852e00998d052df9cd5e411ad2c3ab64ced81f35bf4dc02c037"
+    url "https://github.com/Sanne/incus-spawn/releases/download/v0.6.0/completions.tar.gz"
+    sha256 "cb7db99c4e08046b2a155c55b036a59cabb2d5e41650ade0d1becd0a1c4e65ba"
   end
 
   def install
@@ -31,6 +35,10 @@ class IncusSpawn < Formula
 
     resource("isx-proxy").stage do
       bin.install "isx-proxy-macos-aarch64" => "isx-proxy"
+    end
+
+    resource("isx-vm").stage do
+      bin.install "isx-vm-macos-aarch64" => "isx-vm"
     end
 
     resource("git-remote-isx").stage do
@@ -61,6 +69,13 @@ class IncusSpawn < Formula
 
       To launch the interactive TUI:
         isx
+
+      Upgrading from isx 0.5.3 or earlier, whose VM ran under vfkit:
+        quit the isx TUI and every isx mcp, then run
+        isx proxy restart
+        isx vm restart
+      Afterwards brew autoremove removes vfkit. Details:
+      https://isx.run/docs/faq#how-do-i-upgrade-a-mac-whose-vm-ran-with-vfkit
 
       Documentation: https://github.com/Sanne/incus-spawn
     EOS
